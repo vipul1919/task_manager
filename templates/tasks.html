@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Tasks</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <h2>Your Tasks</h2>
+    <form method="POST" action="/create-task">
+        <input type="text" name="task_name" placeholder="Task Name" required>
+        <textarea name="description" placeholder="Description"></textarea>
+        <input type="text" name="category" placeholder="Category">
+        <input type="text" name="priority" placeholder="Priority">
+        <input type="date" name="due_date">
+        <button type="submit">Create Task</button>
+    </form>
+
+    <h3>Task List</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Category</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task['task_name'] }}</td>
+                    <td>{{ task['category'] }}</td>
+                    <td>{{ task['priority'] }}</td>
+                    <td>{{ task['due_date'] }}</td>
+                    <td><a href="/delete-task/{{ task['id'] }}">Delete</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="/logout">Logout</a>
+</body>
+</html>
